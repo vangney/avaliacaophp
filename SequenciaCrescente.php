@@ -2,7 +2,7 @@
 
 function SequenciaCrescente(array $array): bool{
 
-    $outsequence = [];
+    $outsequence = 0;
 
     if(count($array)<3){
 
@@ -13,19 +13,11 @@ function SequenciaCrescente(array $array): bool{
 
         for($i = 0; $i < count($array); $i++){
 
-            $newarray = array_slice($array, 0);
-
             for($j = $i + 1; $j < count($array); $j++){
                 
-                if($array[$i] == $array[$j]){
+                if($array[$i] >= $array[$j]){
 
-                    array_push($outsequence, $array[$j]);
-
-                    break;
-                }
-                elseif($array[$i] > $array[$j]){
-
-                    array_push($outsequence, $array[$i]);
+                    $outsequence++;
 
                     break;
                 }
@@ -33,11 +25,7 @@ function SequenciaCrescente(array $array): bool{
         }
     }
 
-    print_r($outsequence);
-
-    // print_r($array);
-
-    if(count($outsequence) < 2){
+    if($outsequence  < 2){
 
         return true;
     }
