@@ -1,56 +1,56 @@
 <?php
 
-function SequenciaCrescente(array $array): bool{
+function SequenciaCrescente(array $array){
 
-    $outsequence = 0;
+    for($i = 0; $i < count($array); $i++){
 
-    $igualdades = 0;
+        $subArray = array_merge(array_slice($array, 0, $i), array_slice($array, $i + 1));  
 
-    if(count($array)<3){
+        $condicional = true;
+        
+        for($j = 1; $j < count($subArray); $j++){
 
-        return true;
-    }
+            if($subArray[$j] <= $subArray[$j -1]){
 
-    else{       
+                $condicional = false;
 
-        for($i = 0; $i < count($array); $i++){
+                break;
+            }
+        }
 
-            for($j = $i + 1; $j < count($array); $j++){
-                
-                if($array[$i] == $array[$j]){
+        if($condicional){
 
-                    $igualdades++;
-
-                    break;
-                }
-            }            
-
-            for($j = $i + 1; $j < count($array); $j++){
-
-                if($array[$i] >= $array[$j]){
-
-                    $outsequence++;
-
-                    break;
-                }
-            }            
+            return true;
         }
     }
 
-    if($igualdades > 1){
+    return false;
+}
 
-        return false;
-    }
+/**
+ * Cria sequências de elementos randômicos no intervalo [0, 10].
+ * Chama a função SequenciaCrescente() para testar cada sequência.
+ * O teste é encerrado quando SequenciaCrescente() retornar true.
+ * @param int $quantidade A quantidade de elementos randômicos em cada sequência
+ */
 
-    else if($outsequence - $igualdades  <= 1){
+function testeSequenciaCrescente($quantidade){
+
+    do{
+        $array = [];
+
+        for($i = 0; $i < $quantidade; $i++){
     
-        return true;
-    }
+            array_push($array, rand(0, 10));
+        }        
 
-    else {
+        $return = SequenciaCrescente($array);
 
-        return false;
-    }
+        print_r($array);
+
+        var_dump($return);
+
+    } while(!$return);
 }
 
 ?>
